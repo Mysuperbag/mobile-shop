@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot插槽的基本使用</title>
+</head>
+<body>
+<div id="app">
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn>
+        <div>自定义插槽</div>
+    </cpn>
+    <cpn>
+        <div>多个自定义插槽</div>
+        <button>多个自定义插槽</button>
+    </cpn>
+
+
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<template id="cpn">
+    <div>
+        <h2>组件高级，插槽的使用</h2>
+        <p>1.插槽的基本使用 slot </p>
+        <p>2.插槽可以有默认值</p>
+        <p>3.如果有多个自定义值，则会一起替换插槽</p>
+        <slot>
+            <button>这是插槽的默认值</button>
+        </slot>
+    </div>
+</template>
+
+<script>
+
+
+    //2.注册组件(全局组件，可以在多个Vue实例中使用)
+    Vue.component('cpn', {
+        template: '#cpn'
+    })
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello,world"
+        }
+    });
+</script>
+</html>

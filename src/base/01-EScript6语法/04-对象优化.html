@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象优化</title>
+</head>
+<body>
+<script>
+
+    //1.对象方法
+    const person = {
+        name: 'jack',
+        age: 21,
+        language: ['java', 'javascript', 'python']
+    }
+
+    console.log(Object.keys(person));//["name", "age", "language"]
+    console.log(Object.values(person));//["jack", 21, Array(3)]
+    console.log(Object.entries(person));//[Array(2), Array(2), Array(2)]
+
+
+    //2.对象合并
+    const target = {a: 1};
+    const source1 = {b: 2};
+    const source2 = {c: 3};
+
+    Object.assign(target, source1, source2);
+
+    console.log(target);//{a:1,b:2,c:3}
+
+    //3.对象简写
+    const name = "java";
+    const age = "23";
+    const person1 = {name: name, age: age}
+    const person2 = {name, age};
+
+    console.log(person1);
+    console.log(person2);
+
+    //4.对象函数简写
+    const person3 = {
+        name: 'jack',
+        //原先写法
+        eat: function (food) {
+            console.log(this.name + " eat " + food);
+        },
+        //简单写法
+        eat2(food) {
+            console.log(this.name + " eat " + food);
+        },
+        //箭头函数写法 箭头函数内部没有this
+        eat3: food => console.log(person3.name + " eat " + food),
+    }
+
+    person3.eat("apple");
+    person3.eat2("banana");
+    person3.eat3("orange");
+
+    //5.对象拓展运算符
+    //拷贝对象，深拷贝
+    let p1 = {name: 'Amy', age: 15}
+    let someone = {...p1};
+
+    console.log(someone);//{name:'Amy', age: 15}
+
+    let someone2 = {...getObject(p1)};
+    console.log("======someone2");
+    console.log(someone2);
+
+    function getObject(Object) {
+      return Object;
+    }
+
+    //合并对象
+    let age1 ={age: 15}
+    let name1 = {name: 'Helly'}
+    let p2 = {name: 'Mousse'}
+    p2 = {...age1, ...name1};
+    console.log(p2);//{name:'Helly',age:15}
+
+</script>
+</body>
+</html>

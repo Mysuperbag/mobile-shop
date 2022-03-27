@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- view 显示部分 -->
+<div id="app">
+    <h2>当前计数：{{counter}}</h2>
+    <button @click="counter++;">+</button>
+    <button @click="counter--;">-</button>
+
+    <br/>
+    <button @click="add()">+</button>
+    <button @click="sub()">-</button>
+
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+
+    /**
+    * 函数和方法的区别
+    *   函数是一段代码，通过名字来调用，和对象无关
+    *   函数是一段代码，通过名字来调用，但是对象关联
+    *
+    *
+    * MVVM
+    *   Model
+    *       1.数据层 data:{}
+    *       2.可能是服务器的数据，也也能是固定数据
+    *
+    *   View:
+    *       1.视图层:<div id="app"></>
+    *       2.在前端开发中，通常就是DOM层
+    *       3.主要的作用是给用户展示各种数据
+    *
+    *   ViewModel:
+    *       1.视图模型层:new Vue()
+    *       2.是 View 和 Model 沟通的桥梁
+    *       3.一方面实现了 Data Binding ，也就是数据绑定，将 Model 的改变实时的反映到 View 中
+    *       4.一方面实现了 Dom Listener ，也就是DOM监听，当 DOM 发生一些事件，会改变对应 View
+    *
+    * 1.当页面显示 Vue 实例中定义的 data 定义的数据，当 data 改变，页面也会跟着改变，这是响应式布局
+    *   Model 通过Vue实例中的 ViewModel 的 Data Bindings 事件，修改 View 中的 DOM
+    *
+    * 2.当页面绑定了事件后，点击事件对数据进行修改，VUE 实例中的 ViewModel 的 DOM Listeners 会通过
+    *   Plain JavaScript Objects 对 Model 进行修改，并且通过数据绑定重新修改 View 在页面上的值
+    * */
+
+
+    new Vue({
+        el: "#app",
+
+        //data bindings
+        data: {
+            counter: 0
+        },
+
+        //dom listeners
+        methods: {
+            add() {
+                this.counter++;
+            },
+            sub() {
+                this.counter--;
+            }
+        }
+    })
+
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数优化</title>
+</head>
+<body>
+<script>
+    //1.函数默认参数优化
+    //在ES6之前，我们无法给一个函数参数设置默认参数，只能采用变通写法
+    function add(a, b) {
+        b = b || 1;
+        return a + b;
+    }
+
+    console.log(add(10));
+    console.log(add(10, 20));
+
+    //在ES6语法中，我们可以在参数上添加默认值，没传就会自动使用默认值
+    function add2(a, b = 1) {
+        return a + b;
+    }
+
+    console.log(add2(10));
+    console.log(add2(10, 20));
+
+    //2.不定参数优化
+    function fun(...values) {
+        return values.length;
+    }
+
+    console.log(fun(1, 2))
+    console.log(fun(1, 2, 3, 4, 5))
+
+
+    //3.箭头函数与lambda表达式
+    let print = function (obj) {
+        console.log(obj);
+    }
+    print("hello");
+
+    let print2 = obj => console.log(obj);
+    print2("hello")
+
+    let sum = function (a, b) {
+        return a + b;
+    };
+
+    console.log(sum(10, 20));
+
+    let sum2 = (a,b) => a + b;
+    console.log(sum2(10, 20));
+
+    //4.箭头函数与解构表达式
+    const person = {
+        name:'jack',
+        age:21,
+        language: ['java', 'javascript', 'python']
+    }
+
+    function hello(person) {
+        console.log("hello" + person.name);
+    }
+    hello(person)
+
+    let hello2 = ({name}) => console.log("hello," + name);
+    hello2(person);
+
+</script>
+</body>
+</html>

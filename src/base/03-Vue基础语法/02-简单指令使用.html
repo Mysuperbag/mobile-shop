@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单指令的使用</title>
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<body>
+<div id="app">
+    <h2>{{message}}</h2>
+    <!-- 只使用一次 -->
+    <h2 v-once>{{message}}</h2>
+    <!-- 显示html -->
+    <h2 v-html="url"></h2>
+    <!-- 转义，原封不动的展示 -->
+    <h2 v-pre> > </h2>
+    <h2 v-pre> {{message}}</h2>
+    <!-- 解决插值闪烁问题 -->
+    <h2 v-cloak> {{message}}</h2>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello,world",
+            url: `<a href="https://www.baidu.com">百度一下</a>`
+        }
+    });
+</script>
+</html>
+

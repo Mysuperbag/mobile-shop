@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>组件通信-子传父$emit</title>
+</head>
+<body>
+<div id="app">
+    <!--
+       监听子组件的事件,默认将数据传入方法中
+   -->
+    <com @item-click="cnpClick"></com>
+    <cpn v-model="category"></cpn>
+    <h2>{{category}}</h2>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 通过绑定input事件和v-model将数据双向绑定 -->
+<template id="cpn">
+    <div>
+        <button v-for="category in categories" @click="btnHandler(category)">
+            {{category.name}}
+        </button>
+    </div>
+</template>
+<!-- 通过自定义方法item-click返回父组件数据，并执行cnpClick方法将值赋值 -->
+<template id="com">
+  <div>
+    <button v-for="category in categories" @click="btnHandler(category)">
+      {{category.name}}
+    </button>
+  </div>
+</template>
+<script>
+
+    const cpn = {
+        template: '#cpn',
+
+        data() {
+            return {
+                categories: [
+                    {id: 100, name: '热门手机'},
+                    {id: 101, name: '手机数码'},
+                    {id: 102, name: '家用家电'},
+                    {id: 103, name: '电脑办公'},
+                ]
+            }
+        },
+
+        methods: {
+            //将子组件的数据返回到父组件
+            btnHandler(category) {
+                this.$emit('input', category.name);
+            }
+        }
+    }
+
+
+    const com = {
+      template: '#com',
+
+      data() {
+        return {
+          categories: [
+            {id: 100, name: '热门手机'},
+            {id: 101, name: '手机数码'},
+            {id: 102, name: '家用家电'},
+            {id: 103, name: '电脑办公'},
+          ]
+        }
+      },
+
+      methods: {
+        //将子组件的数据返回到父组件
+        btnHandler(category) {
+          this.$emit('item-click', category);
+        }
+      }
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello,world",
+            category:'默认没有选中'
+        },
+        components: {
+            cpn,
+            com
+        },
+        methods: {
+            cnpClick(category) {
+                this.category = category.name;
+            }
+        }
+    });
+</script>
+</html>

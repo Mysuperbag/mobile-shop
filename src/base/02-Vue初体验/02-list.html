@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+     <ul>
+         <li v-for="item in movies">{{item}}</li>
+     </ul>
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    //响应式布局，当数据发生改变后，页面会自动进行修改
+    new Vue({
+        el:"#app",
+        data:{
+            movies:['星际穿越','大话西游','盗梦空间','流浪地球']
+        }
+    })
+
+</script>
+</html>

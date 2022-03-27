@@ -1,0 +1,35 @@
+<template>
+  <div class="recommend-info">
+    <div class="info-header">热门推荐</div>
+    <goods-list :goods="recommends"/>
+  </div>
+</template>
+
+<script>
+import GoodsList from "@/views/modules/goods/goods-list";
+export default {
+  name: "goods-detail-recommend",
+  components: {GoodsList},
+  props:{
+    recommends:{
+      type:Array,
+      default(){
+        return [];
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+.recommend-info {
+  padding: 5px;
+}
+
+.info-header {
+  line-height: 40px;
+  padding-left: 8px;
+  font-size: 15px;
+  color: #333;
+}
+</style>

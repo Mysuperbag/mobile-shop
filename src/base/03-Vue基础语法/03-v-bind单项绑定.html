@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind单项绑定</title>
+</head>
+<style>
+    .active {
+        color: red;
+    }
+</style>
+<body>
+<div id="app">
+    <!-- 可以对class进行添加 -->
+    <h2 class="title" :class="{active:isActive}">{{message}}</h2>
+    <button @click="changeHandle">改变颜色</button>
+    <br/>
+
+    <!-- v-bind:src 语法糖 :scr -->
+    <img :src="url" alt="Vue 实例生命周期" style="zoom: 30%">
+    <!-- {} 对象 可以放入键值对 -->
+    <img v-bind:src="url" alt="Vue 实例生命周期" :style="{zoom: '30%'}">
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+
+        data: {
+            message: "hello,world",
+            url: 'https://cn.vuejs.org/images/lifecycle.png',
+            isActive: true
+        },
+
+        methods: {
+          changeHandle() {
+                this.isActive = !this.isActive;
+            }
+        }
+    });
+</script>
+</html>
+

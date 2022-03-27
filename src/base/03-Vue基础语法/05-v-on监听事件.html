@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-on监听事件</title>
+</head>
+<body>
+
+<!-- view 显示部分 -->
+<div id="app">
+    <h2>当前计数：{{counter}}</h2>
+    <button @click="counter++;">+</button>
+    <button @click="counter--;">-</button>
+
+    <br/>
+    <button @click="add()">+</button>
+    <!--
+        在事件自定义中，方法可以省略括号，但是方法本身是需要一个参数的
+        所有Vue会默认将浏览器的event事件对象作为餐宿传入到方法中
+        可以手动传入$event
+     -->
+    <button @click="sub(message,$event)">-</button>
+
+    <!--
+        默认修饰符
+            .prevent阻止默认事件
+    -->
+    <form action="https://www.baidu.com">
+        <input type="submit" value="提交" @click.prevent="submitClick()">
+    </form>
+
+    <!--
+        监听某个键盘点击事件
+         .{ keyCode | KeyAlias}
+            keyCode:键盘code
+            keyAlias:键盘别称
+    -->
+    <input type="text" @keyup="submitClick" value="键盘点击事件">
+    <input type="text" @keydown="submitClick" value="键盘下压事件">
+    <input type="text" @keyup.enter="submitClick" value="键盘点击回车事件">
+
+    <!--
+        自定义组件的监听事件
+            .native
+          只执行一次监听事件
+            .once
+        <cpn @click.native="submitClick"></cpn>
+    -->
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    new Vue({
+        el: "#app",
+
+        data: {
+            counter: 0,
+            message: "hello,world"
+        },
+
+        methods: {
+            add() {
+                this.counter++;
+            },
+            sub(str, event) {
+                console.log(str)
+                console.log(event);
+                this.counter--;
+            },
+
+            //提交测试
+            submitClick(){
+                console.log("hello console");
+            }
+        }
+    })
+
+</script>
+</html>

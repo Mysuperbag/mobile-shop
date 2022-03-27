@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model双向绑定</title>
+</head>
+<body>
+<div id="app">
+    <!-- v-model -->
+    <input v-model="message" type="text">
+    <h2>{{message}}</h2>
+
+    <!--
+        自定义实现 v-model效果
+        @input是input的默认事件
+            @input的2中绑定事件的写法
+                1.@input="changeHandler($event)
+                2.@input="changeHandler
+
+     -->
+    <input type="text" :value="message" @input="changeHandler($event)">
+    <h2>{{message}}</h2>
+
+    <!--
+        定义实现 v-model效果另一种写法
+    -->
+    <input type="text" :value="message" @input="message = $event.target.value">
+    <h2>{{message}}</h2>
+
+
+    <!--
+        v-model的修饰符
+            v-model.lazy:懒加载
+            v-model.number:数字
+            v-model.trim:删除空格
+    -->
+    <input v-model.lazy="message" type="text">
+    <input v-model.number="message" type="text">
+    <h2>{{message}}</h2>
+
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello,world"
+        },
+        methods: {
+            changeHandler(event) {
+                this.message = event.target.value;
+            }
+        }
+    });
+</script>
+</html>

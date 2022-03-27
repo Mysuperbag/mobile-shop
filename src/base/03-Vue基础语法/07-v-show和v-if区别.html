@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-if和v-show的区别</title>
+</head>
+<body>
+<div id="app">
+    <!-- v-if:当条件为false,这个标签完全不会存在dom中 -->
+    <h2 v-if="isShow" id="aaa">{{message}}</h2>
+    <!-- v-show:当条件为false,v-show只是给我们的元素添加一个行内样式: display:none -->
+    <h2 v-show="isShow" id="bbb">{{message}}</h2>
+    <!-- v-if在只切换一次的时候使用合适，v-show在频繁切换的时候使用合适 -->
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello,world",
+            isShow: true
+        }
+    });
+</script>
+</html>

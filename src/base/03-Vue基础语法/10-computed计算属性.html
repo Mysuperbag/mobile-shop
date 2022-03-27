@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Computed计算属性</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{fullName}}</h2>
+    <h2>{{totalPrice}}</h2>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            firstName: "cookie",
+            lastName: "mousse",
+            books: [
+                {id: 100, name: "Unix编译原理", price: 100},
+                {id: 101, name: "代码大全", price: 139},
+                {id: 102, name: "深入理解计算机原理", price: 99},
+                {id: 103, name: "现代操作系统", price: 123},
+            ]
+        },
+        /*
+        * 计算属性和methods的区别
+        *   多次执行后，如果属性没有改变，则计算属性会缓存，只调用一次，
+        *   而methods每次都会重新调用，
+        *
+        * */
+        computed: {
+            //样式看起来是函数，其实是一个属性
+            fullName() {
+                return this.firstName + " " + this.lastName;
+            },
+            //计算所有书本的价格
+            totalPrice() {
+                //price 上一次调用返回的值，或者是提供的初始值
+                //book  数组中当前被处理的元素
+                return this.books.reduce((price, book) => {
+                    return price + book.price;
+                }, 0);
+            }
+        }
+    });
+</script>
+</html>

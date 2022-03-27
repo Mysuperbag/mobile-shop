@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-if条件判断</title>
+</head>
+<body>
+<div id="app">
+    <button v-on:click="random=Math.random()">点我呀</button>
+    <span>{{random}}</span>
+
+    <h1 v-if="random>=0.75">
+        看到我啦? &gt; =0.75
+    </h1>
+    <h1 v-else-if="random>=0.5">
+        看到我啦? &gt; =0.5
+    </h1>
+    <h1 v-else-if="random>=0.2">
+        看到我啦? &gt;= 0.2
+    </h1>
+    <h1 v-else>
+        看到我啦? &lt; 0.2
+    </h1>
+
+    <h2>用户登录案例</h2>
+
+    <!--
+        虚拟DOM复用使用相同的input，解决方案，加上内置属性key或使用v-model
+    -->
+    <span v-if="isUser">
+        <label for="username">用户账号</label>
+        <input type="text" id="username" v-model="user.username"  placeholder="用户账号" key="usernmae">
+    </span>
+    <span v-else>
+        <label for="email">用户邮箱</label>
+        <input type="text" id="email" v-model="user.email" placeholder="用户邮箱" key="email">
+    </span>
+    <button @click="isUser = !isUser">切换类型</button>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            random: 1 ,
+            isUser: true,
+            user:{
+                email: '',
+                username:'',
+            }
+        }
+    });
+</script>
+</html>
+
